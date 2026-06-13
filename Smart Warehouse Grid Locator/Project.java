@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 class GridItem {
     private String itemId;
     private String itemName;
@@ -75,20 +77,45 @@ class Warehouse {
         }
     }
 }
-
 public class Project {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
 
-        Warehouse warehouse = new Warehouse(5, 5);
+        System.out.print("Enter number of rows: ");
+        int rows = sc.nextInt();
 
-        warehouse.addItem(0, 0, new GridItem("I101", "Laptop", 10));
-        warehouse.addItem(1, 2, new GridItem("I102", "Phone", 25));
-        warehouse.addItem(3, 1, new GridItem("I103", "Keyboard", 15));
-        warehouse.addItem(4, 4, new GridItem("I104", "Mouse", 20));
+        System.out.print("Enter number of columns: ");
+        int cols = sc.nextInt();
 
+        Warehouse warehouse = new Warehouse(rows, cols);
+
+        System.out.print("Enter number of items: ");
+        int n = sc.nextInt();
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nEnter details for item " + (i + 1));
+
+            System.out.print("Item ID: ");
+            String id = sc.next();
+
+            System.out.print("Item Name: ");
+            String name = sc.next();
+
+            System.out.print("Quantity: ");
+            int quantity = sc.nextInt();
+
+            System.out.print("Row position: ");
+            int row = sc.nextInt();
+
+            System.out.print("Column position: ");
+            int col = sc.nextInt();
+
+            warehouse.addItem(row, col, new GridItem(id, name, quantity));
+        }
         warehouse.displayGrid();
 
-        warehouse.searchItem("I102");
-        warehouse.searchItem("I999");
+        System.out.print("\nEnter item ID to search: ");
+        String searchId = sc.next();
+        warehouse.searchItem(searchId);
     }
 }
